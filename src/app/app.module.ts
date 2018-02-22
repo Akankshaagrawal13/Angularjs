@@ -5,7 +5,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
+import { LeaderService } from './services/leader.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { FormsModule } from '@angular/forms'; 
+
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -16,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -27,16 +31,21 @@ import { ContactComponent } from './contact/contact.component';
     FooterComponent,
     AboutComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
+  ],
+   entryComponents: [
+        LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
+     FormsModule,
     AppRoutingModule
   ],
-  providers: [DishService,PromotionService],
+  providers: [DishService,PromotionService,LeaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
