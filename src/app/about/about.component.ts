@@ -8,7 +8,8 @@ import { LeaderService } from '../services/leader.service';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
-  leaders: leader[];
+
+  leaders: Leader[];
 
   constructor(private leaderService: LeaderService) { }
 
