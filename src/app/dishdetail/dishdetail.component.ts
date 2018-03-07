@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-import { BaseURL } from '../shared/baseurl';
 import { Comment, Rating } from '../shared/comment';
 
 @Component({
@@ -15,7 +14,6 @@ import { Comment, Rating } from '../shared/comment';
 })
 export class DishdetailComponent implements OnInit {
 
- 
   dish: Dish;
   dishIds: number[];
   prev: number;
@@ -23,18 +21,18 @@ export class DishdetailComponent implements OnInit {
   commentForm: FormGroup;
   comment: Comment;
   rating = Rating;
-  errMess : string;
+  errMess: string;
   formErrors = {
     'author': '',
     'comment': ''
    };
   validationMessages = {
     'author': {
-      'required':      'Author Name is required.',
-      'minlength':     'Author Name must be at least 2 characters long.'
+      'required':       'Author Name is required.',
+      'minlength':    'Author Name must be at least 2 characters long.'
      },
     'comment': {
-      'required':      'Comment is required.'
+      'required': 'Comment is required.'
      },
   };
 
@@ -44,12 +42,12 @@ export class DishdetailComponent implements OnInit {
     @Inject('BaseURL') private BaseURL) {}
 
   ngOnInit() {
-      this.createForm();
+    this.createForm();
      this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params
       .switchMap((params: Params) => this.dishService.getDish(+params['id']))
       .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
-       errmess => this.errMess = <any>errmess);
+      errmess => this.errMess = <any>errmess);
  }
 
   setPrevNext(dishId: number) {
@@ -62,7 +60,7 @@ export class DishdetailComponent implements OnInit {
     this.location.back();
   }
 
-  createForm() : void {
+  createForm() {
       this.commentForm = this.fb.group({
       author: ['', [Validators.required, Validators.minLength(2)]],
       rating:5,
@@ -87,11 +85,11 @@ export class DishdetailComponent implements OnInit {
     }
   }
 
-  onCommentSubmit() {
+  onSubmit() {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
     console.log(this.comment);
- 
+    this.comment.rating = Number(this.comment.rating);
     this.dish.comments.push(this.comment);
     this.commentForm.markAsPristine()
     this.commentForm.reset({

@@ -11,7 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { HttpModule } from '@angular/http';
-import { BaseURL } from './shared/baseurl'; 
+import { BaseURL } from './shared/baseurl';
+
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -48,7 +51,8 @@ import { LoginComponent } from './login/login.component';
      FormsModule,
     AppRoutingModule,
      ReactiveFormsModule,
-      HttpModule 
+      HttpModule,
+     RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [DishService,PromotionService,LeaderService,ProcessHTTPMsgService,{provide:'BaseURL',useValue: BaseURL}],
   bootstrap: [AppComponent]

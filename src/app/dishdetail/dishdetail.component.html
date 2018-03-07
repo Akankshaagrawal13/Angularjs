@@ -53,7 +53,7 @@
   <div fxFlex>
      <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
 
-     <form novalidate [formGroup]="commentForm" (ngSubmit)="onCommentSubmit()">
+     <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
           <p>
             <md-input-container class="full-width" dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
               <input mdInput formControlName="author" placeholder="Name" type="text" required>
@@ -61,19 +61,19 @@
                 <span [hidden]="!(formErrors.author)">
                   {{formErrors.author}}</span>
               </md-hint>
-          </md-input-container>
+             </md-input-container>
           </p>
           <p>
-             <md-slider thumbLabel tickInterval="1" step="1" min="1" max="5" formControlName="rating" [value]="rating"></md-slider>
+             <md-slider min="1" max="5"  step="1" thumbLabel tickInterval="1"  formControlName="rating" [value]="rating">{{rating}}</md-slider>
           </p>
           <p>
-            <md-input-container class="full-width" dividerColor="{{(formErrors.comment) ? 'warn' : 'primary'}}">
+             <md-input-container class="full-width" dividerColor="{{(formErrors.comment) ? 'warn' : 'primary'}}">
               <textarea mdInput formControlName="comment" placeholder="Your Comment"  rows=12 required></textarea>
               <md-hint>
                 <span [hidden]="!(formErrors.comment)">
                   {{formErrors.comment}}</span>
               </md-hint>
-              </md-input-container>
+             </md-input-container>
            </p>
             <button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
       </form>
