@@ -26,6 +26,7 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { LoginComponent } from './login/login.component';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
    entryComponents: [
         LoginComponent
@@ -54,7 +56,7 @@ import { LoginComponent } from './login/login.component';
       HttpModule,
      RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [DishService,PromotionService,LeaderService,ProcessHTTPMsgService,{provide:'BaseURL',useValue: BaseURL}],
+  providers: [DishService,PromotionService,LeaderService,{provide:'BaseURL',useValue:BaseURL},ProcessHTTPMsgService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

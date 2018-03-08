@@ -18,21 +18,16 @@ export class DishService {
 
 
   getDishes(): Observable<Dish[]> {
-    return this.http.get(BaseURL + 'dishes')
-                    .map(res => { return this.processHTTPMsgService.extractData(res); })
-                    .catch(error => { return this.processHTTPMsgService.handleError(error); });
+    return this.restangular.all('dishes').getList();
   }
 
   getDish(id: number): Observable<Dish> {
-    return  this.http.get(BaseURL + 'dishes/'+ id)
-                    .map(res => { return this.processHTTPMsgService.extractData(res); })
-                    .catch(error => { return this.processHTTPMsgService.handleError(error); });
+    return  this.restangular.one('dishes',id).get();
   }
 
  getFeaturedDish(): Observable<Dish> {
-    return this.http.get(BaseURL + 'dishes?featured=true')
-                    .map(res => { return this.processHTTPMsgService.extractData(res)[0]; })
-                    .catch(error => { return this.processHTTPMsgService.handleError(error); });
+    return this.restangular.all('dishes').getList({featured: true})
+      .map(dishes => dishes[0]);
   } 
 
 

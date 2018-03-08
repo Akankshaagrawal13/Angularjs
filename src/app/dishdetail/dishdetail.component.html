@@ -6,7 +6,7 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
   <div class="wrapper">
-  <div fxFlex *ngIf="dish">
+  <div fxFlex *ngIf="dish" [@visibility]="visibility">
     <md-card>
       <md-card-header>
         <md-card-title>
@@ -28,7 +28,7 @@
         </md-card-actions> 
         </md-card>
   </div>
-  <div fxFlex *ngIf="dish">
+  <div fxFlex *ngIf="dish" [@visibility]="visibility">
     <md-list>
       <h3>Comments</h3>
       <md-list-item *ngFor="let comment of dish.comments">
@@ -64,7 +64,7 @@
              </md-input-container>
           </p>
           <p>
-             <md-slider min="1" max="5"  step="1" thumbLabel tickInterval="1"  formControlName="rating" [value]="rating">{{rating}}</md-slider>
+             <md-slider min="1" max="5" step="1" thumbLabel tickInterval="1" formControlName="rating"></md-slider>
           </p>
           <p>
              <md-input-container class="full-width" dividerColor="{{(formErrors.comment) ? 'warn' : 'primary'}}">
