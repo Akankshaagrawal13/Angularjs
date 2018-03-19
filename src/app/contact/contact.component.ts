@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormGroupDirective  } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
-import { flyInOut } from '../animations/app.animation';
+import { flyInOut, expand } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,14 +12,20 @@ import { flyInOut } from '../animations/app.animation';
   '[@flyInOut]': 'true',
   'style': 'display: block;'
   },
-  animations: [
-    flyInOut()
-  ]
+   animations: [ flyInOut(),expand() ]
+  
 })
 export class ContactComponent implements OnInit {
 
+
+  @ViewChild(FormGroupDirective) feedbackFormDirective;
+
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedback2: Feedback;
+  feedbackcopy = null;
+  submitted: boolean = false;
+
   contactType = ContactType;
    formErrors = {
     'firstname': '',
@@ -47,7 +54,7 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private feedbackService: FeedbackService, private fb: FormBuilder) {
     this.createForm();
   }
 
@@ -84,9 +91,33 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
-    this.feedbackForm.reset({
+   this.feedback = this.feedbackForm.value;
+   console.log(this.feedbackForm.value)
+   this.feedbackService.submitFeedback(this.feedback)
+   .subscribe(feedback => { this.feedbackcopy = feedback; console.log(this.feedbackcopy);});
+   this.submitted = true;
+    setTimeout(() => {
+      this.submitted = false;
+    }, 5000);
+
+    /* setTimeout(function() { console.log(this.feedbackcopy) },5000)*/
+   
+
+  /* this.feedbackService.submitFeedback(this.feedback);
+    this.feedbackcopy.save()
+      .subscribe(feedback => { this.feedback = feedback; console.log(this.feedback); });
+   setTimeout(function() { console.log(this.feedbackcopy) },5000);
+   this.feedbackForm.reset({
+      firstname: '',
+      lastname: '',
+      telnum: '',
+      email: '',
+      agree: false,
+      contacttype: 'None',
+      message: ''
+    });*/
+
+    this.feedbackFormDirective.resetForm({
       firstname: '',
       lastname: '',
       telnum: '',
@@ -95,6 +126,6 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
-  }
 
-}
+    }
+ }

@@ -12,13 +12,13 @@ import 'rxjs/add/operator/catch';
 
 //import { LEADERS } from '../shared/leaders';
 
-@Injectable()
-export class LeaderService {
+  @Injectable()
+  export class LeaderService {
 
   constructor(private restangular: Restangular,
               private processHTTPMsgService: ProcessHTTPMsgService) { }
 
- getLeaders(): Observable<Leader[]> {
+  getLeaders(): Observable<Leader[]> {
     return this.restangular.all('leaders').getList();
   }
 
@@ -31,22 +31,9 @@ export class LeaderService {
       .map(leaders => leaders[0]);
   }
 
-  getLeaderIds(): Observable<number[]> {
+  getLeaderIds(): Observable<number[] | any> {
     return this.getLeaders()
       .map(leaders => { return leaders.map(leader => leader.id) })
       .catch(error => { return error; } );
-  }
-
-
- getLeaders(): Observable<Leader[]> {
-    return Observable.of(LEADERS).delay(2000);
-  }
-
-  getLeader(id: number): Observable<Leader> {
-    return Observable.of(LEADERS.filter((leader) => (leader.id === id))[0]).delay(2000);
-  }
-
-  getFeaturedLeader(): Observable<Leader> {
-    return Observable.of(LEADERS.filter((leader) => leader.featured)[0]).delay(2000);
   }
 }

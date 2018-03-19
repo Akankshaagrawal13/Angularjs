@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import { Comment } from '../shared/comment';
 import { visibility,flyInOut, expand } from '../animations/app.animation';
+
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
@@ -16,12 +17,12 @@ import { visibility,flyInOut, expand } from '../animations/app.animation';
   'style': 'display: block;'
   },
    animations: [ visibility(), flyInOut(),expand() ]
-
 })
+
 export class DishdetailComponent implements OnInit {
 
   dish: Dish;
-  dishcopy = null;
+ dishcopy = null;
   dishIds: number[];
   prev: number;
   next: number;
@@ -49,7 +50,7 @@ export class DishdetailComponent implements OnInit {
     private fb: FormBuilder,
     @Inject('BaseURL') private BaseURL) {}
 
-  ngOnInit() {
+   ngOnInit() {
     this.createForm();
      this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params

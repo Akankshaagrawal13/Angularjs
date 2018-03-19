@@ -1,8 +1,7 @@
-<div class="container"
+ <div class="container"
      fxLayout="column"
      fxLayoutGap="10px">
-
-     <div fxFlex>
+  <div fxFlex>
             <div>
                <h3>About Us</h3>
                <hr>
@@ -51,19 +50,23 @@
                         </footer>
                     </blockquote>
                 </md-card>
-      </div>
-         <div fxFlex>
-         <h2>Corporate Leadership</h2>
-           <md-list *ngIf="leaders" [@expand]>
+       </div>
+      <div fxFlex>
+          <h2>Corporate Leadership</h2>
+            <md-list *ngIf="leaders" [@expand]>
             <md-list-item *ngFor="let leader of leaders">
-            <img md-list-avatar src={{leader.image}} alt={{leader.name}}>
+            <img md-list-avatar src="{{BaseURL + leader.image}}" alt={{leader.name}}>
             <h4 md-line> {{leader.name}} {{leader.abbr}}</h4>
             <p md-line>{{leader.designation}}</p>
             <p md-line>{{leader.description}}</p>
             </md-list-item>
-          </md-list>
-           <div [hidden]="leaders">
-           <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
-           </div>
-        </div>
+            </md-list>
+            <div [hidden]="leaders || leadererrMess">
+            <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+            </div>
+            <div *ngIf="leadererrMess">
+              <h2>Error</h2>
+              <h4>{{leadererrMess}}</h4>
+            </div>
+      </div>
 </div>

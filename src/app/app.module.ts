@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { FeedbackService } from './services/feedback.service';
+
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -56,7 +58,7 @@ import { HighlightDirective } from './directives/highlight.directive';
       HttpModule,
      RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [DishService,PromotionService,LeaderService,{provide:'BaseURL',useValue:BaseURL},ProcessHTTPMsgService],
+  providers: [DishService,PromotionService,LeaderService,{provide:'BaseURL',useValue:BaseURL},ProcessHTTPMsgService,FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

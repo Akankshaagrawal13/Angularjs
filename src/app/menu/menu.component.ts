@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Dish } from '../shared/dish';
+ import { Component, OnInit, Inject } from '@angular/core';
+ import { Dish } from '../shared/dish';
  import { DishService } from '../services/dish.service';
  import { BaseURL } from '../shared/baseurl';
  import { flyInOut, expand } from '../animations/app.animation';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -11,12 +12,13 @@ import { Dish } from '../shared/dish';
   '[@flyInOut]': 'true',
   'style': 'display: block;'
   },
-   animations: [
+   animations:
+   [
     flyInOut(),
     expand()
   ]
 })
-export class MenuComponent implements OnInit {
+ export class MenuComponent implements OnInit {
   dishes: Dish[];
    errMess: string;
 
@@ -26,6 +28,5 @@ export class MenuComponent implements OnInit {
    this.dishService.getDishes()
     .subscribe(dishes => this.dishes = dishes,
       errmess => this.errMess = <any>errmess);
-
-  }
+   }
 }
